@@ -1,2 +1,6 @@
 /deps/
 /install/
+/.emscripten_cache
+.emscripten
+.emscripten_cache.lock
+.emscripten_sanity_wasm

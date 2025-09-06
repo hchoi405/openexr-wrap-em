@@ -1,0 +1,32 @@
+{
+  "name": "openexr-wrap-em",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "EMSCRIPTEN_SDK_ID": "latest"
+    }
+  },
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "WRAPPER_INSTALL": "/workspaces/openexr-wrap-em/install",
+    "EMSDK": "/opt/emsdk"
+  },
+  "remoteEnv": {
+    "WRAPPER_INSTALL": "/workspaces/openexr-wrap-em/install",
+    "EMSDK": "/opt/emsdk"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "openai.chatgpt"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.codex,target=/tmp/host-codex,type=bind,readonly"
+  ],
+  "postCreateCommand": "mkdir -p /workspaces/openexr-wrap-em/install && chmod +x /workspaces/openexr-wrap-em/scripts/build-deps.sh || true && bash -lc 'if [ -f /tmp/host-codex/auth.json ]; then install -d -m 700 /home/vscode/.codex && install -m 600 /tmp/host-codex/auth.json /home/vscode/.codex/auth.json; fi'"
+}

@@ -4,10 +4,9 @@ This wrapper is intended to be used via emscripten to interface with OpenEXR fro
 JavaScript. It has the following dependencies:
 
 - [emscripten](http://kripken.github.io/emscripten-site/index.html): To compile the
-  dependencies and the wrapper itself. Tested version is emscripten-1.38.12.
-- [OpenEXR](http://openexr.com/): The main library. Tested version is 2.2.1. Both the
-  openexr and the ilmbase libraries are required.
-- [zlib](http://zlib.net/): Dependency for OpenEXR. Tested version is 1.2.11.
+  dependencies and the wrapper itself.
+- [OpenEXR](http://openexr.com/): The main library.
+- [zlib](http://zlib.net/): Dependency for OpenEXR.
 
 
 # Compiling
@@ -45,8 +44,28 @@ more optimization, but their use is [somewhat questionable][1].
 		can help figuring out the exact parameters. Use node to run the created .js
 		programs. Alternatively, copy the two headers from a native build.
 4. Building the wrapper
-	0. `cd wrapp`
+	0. `cd wrap`
 	1. `make`
+
+# VS Code Devcontainer
+
+A ready-to-use devcontainer is included to match the tested toolchain versions in this README.
+
+- Open this folder in VS Code and choose "Reopen in Container".
+- The container installs Emscripten SDK and build tools.
+- Dependencies are expected under `install` at the repo root (as referenced by `wrap/Makefile`).
+
+Build steps inside the container:
+
+- Option A (scripted): `./scripts/build-deps.sh` to download and build dependencies into `install`.
+- Option B (manual): follow the steps above in this README, using `$WRAPPER_INSTALL=/workspaces/openexr-wrap-em/install`.
+
+Then build the wrapper:
+
+```
+cd wrap
+make
+```
 
 [0]: http://kripken.github.io/emscripten-site/docs/compiling/Building-Projects.html#building-projects
 [1]: https://kripken.github.io/emscripten-site/docs/optimizing/Optimizing-Code.html

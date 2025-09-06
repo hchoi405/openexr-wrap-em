@@ -2,6 +2,7 @@
 #include <OpenEXR/ImfHeader.h>
 #include <OpenEXR/ImfChannelList.h>
 #include <OpenEXR/ImfIO.h>
+#include <OpenEXR/ImfFrameBuffer.h>
 
 #include <vector>
 #include <map>
@@ -48,12 +49,12 @@ public:
 		return current;
 	}
 
-	virtual OPENEXR_IMF_NAMESPACE::Int64 tellg() override
+	virtual std::uint64_t tellg() override
 	{
 		return m_offset;
 	}
 
-	virtual void seekg (OPENEXR_IMF_NAMESPACE::Int64 pos) override
+	virtual void seekg (std::uint64_t pos) override
 	{
 		m_offset = pos;
 	}
